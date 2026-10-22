@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>모멘트 — 나의 작은 작업 공간</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+    :root{--bg:#f5f4f0;--paper:#fff;--ink:#242d2a;--muted:#828980;--line:#e8ebe4;--green:#386950;--soft:#edf3eb;--radius:26px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans','Noto Sans KR',sans-serif;font-size:14px}button,input,textarea,select{font:inherit}button,select{cursor:pointer}button{color:inherit}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #86ac76;outline-offset:3px}button{transition:background .18s,transform .18s}button:active{transform:scale(.97)}
+    .shell{max-width:1200px;margin:auto;padding:0 42px}header{height:104px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e1e5dc}.brand{display:flex;align-items:center;gap:11px;font-size:23px;font-weight:800;letter-spacing:-1px}.brand-icon{background:var(--green);color:white;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:25px}.header-right{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:12px}.status{display:flex;align-items:center;gap:7px}.dot{width:6px;height:6px;background:#6c9663;border-radius:50%}.avatar{width:34px;height:34px;border-radius:50%;background:#e1e8d9;display:grid;place-items:center;color:var(--green);font-weight:700}
+    main{padding:43px 0 32px}.intro{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--green);font-weight:700;margin:0 0 10px}h1{font-size:31px;letter-spacing:-1.4px;font-weight:700;margin:0 0 10px}.subtitle{color:var(--muted);margin:0;font-size:13px}.clock{text-align:right;font-size:31px;letter-spacing:-1px;font-variant-numeric:tabular-nums}.date{font-size:12px;letter-spacing:0;color:var(--muted);margin-top:5px}
+    .grid{display:grid;grid-template-columns:1.12fr 1fr;gap:22px}.card{background:var(--paper);border:1px solid #e8ebe4;border-radius:var(--radius);padding:26px;box-shadow:0 4px 20px #233f2410}.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.card-title{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:700}.card-icon{font-size:18px;color:var(--green)}.tag{font-size:10px;letter-spacing:1px;color:var(--muted)}.icon-btn{border:1px solid var(--line);border-radius:10px;background:white;min-width:32px;height:32px;font-size:17px;color:#697568;display:inline-grid;place-items:center}.icon-btn:hover{background:var(--soft)}
+    .weather{background:#eaf0e5;border-color:#e0e7da;position:relative;overflow:hidden;min-height:307px}.weather .card-head{position:relative;z-index:1}.weather select{background:transparent;border:0;color:var(--ink);font-weight:600;max-width:160px;padding:5px 0}.weather-tools{display:flex;gap:7px}.weather .icon-btn{background:#ffffff80;border-color:#ffffff80}.weather-main{display:flex;justify-content:space-between;align-items:center;margin:16px 0 22px}.temperature{font-size:69px;letter-spacing:-4px;line-height:1;font-weight:500}.temperature span{font-size:34px;vertical-align:top;letter-spacing:-1px}.condition{margin-top:12px;font-size:13px;color:#5b7058}.weather-art{width:136px;height:112px;display:grid;place-items:center;font-size:88px;line-height:1;filter:drop-shadow(0 12px 10px #6c845125);user-select:none}.weather-details{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #d4dfcd;padding-top:18px;gap:10px}.detail-label{color:#71816b;font-size:11px;margin-bottom:6px}.detail-value{font-size:14px;font-weight:600}.weather-update{font-size:10px;color:#75836f;margin-top:18px;min-height:15px}.weather-update a{color:inherit}.weather-error{color:#9a493c}
+    .calculator{grid-column:2;grid-row:1 / span 2;padding-bottom:24px}.calc-screen{background:#f5f7f3;border:1px solid #edf0e9;border-radius:16px;padding:20px;margin:3px 0 18px;text-align:right;min-height:124px;display:flex;flex-direction:column;justify-content:end;overflow:hidden}.calc-history{min-height:20px;color:var(--muted);font-size:13px;margin-bottom:9px;overflow-wrap:anywhere}.calc-display{font-size:37px;font-weight:500;letter-spacing:-1.5px;min-height:47px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.key{border:0;border-radius:13px;background:#f5f6f2;height:62px;font-size:21px}.key:hover{background:#e9ede4}.key.utility{color:#75816d;background:#edf1e8;font-size:16px}.key.operator{background:#e8efe3;color:var(--green);font-size:24px}.key.equals{background:var(--green);color:white}.key.equals:hover{background:#2d5741}.key.zero{grid-column:span 2}.calc-tip{font-size:11px;text-align:center;color:var(--muted);margin:19px 0 0}
+    .focus{background:#fff;min-height:218px}.focus-content{display:flex;align-items:center;justify-content:space-between;gap:15px}.timer{font-size:49px;font-variant-numeric:tabular-nums;letter-spacing:-2px;line-height:1.1}.timer-caption{color:var(--muted);font-size:11px;margin-top:10px}.timer-controls{display:flex;gap:8px;align-items:center}.primary{border:0;background:var(--green);color:white;border-radius:12px;padding:12px 20px;font-size:12px;white-space:nowrap}.primary:hover{background:#2e5943}.timer-reset{height:40px;width:40px}.focus-progress{height:4px;background:#edf0e8;border-radius:5px;margin-top:23px;overflow:hidden}.focus-progress div{height:100%;width:0;background:#95ae7d;transition:width .3s}.focus select{border:1px solid var(--line);border-radius:8px;padding:5px;color:#737d6b;background:white;font-size:11px}
+    .notes{grid-column:1 / -1;padding-bottom:17px}.notes .card-head{margin-bottom:10px}.save-status{font-size:11px;color:#8a9382}.notes textarea{display:block;width:100%;height:91px;resize:vertical;min-height:70px;border:0;background:transparent;line-height:1.9;padding:7px 0;color:var(--ink);font-size:13px}.notes textarea::placeholder{color:#a1a798}.notes-footer{border-top:1px solid #f0f1ed;padding-top:11px;display:flex;align-items:center;justify-content:space-between;color:#9aA191;font-size:10px}.notes-footer button{background:none;border:0;color:#8a9382;font-size:11px;padding:3px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#2a4433;color:white;padding:13px 22px;border-radius:14px;box-shadow:0 5px 30px #0002;z-index:10;font-size:13px;max-width:90vw;text-align:center}.toast[hidden]{display:none}footer{display:flex;justify-content:space-between;gap:15px;color:#9aA191;font-size:10px;padding:24px 0 0}.footer-brand{letter-spacing:2px;color:#7f8b75}.leaf{font-size:14px}
+    @media(min-width:1100px){.shell{max-width:1120px}.grid{grid-template-columns:1.15fr 1fr}.calculator .key{height:65px}}
+    @media(max-width:700px){.shell{padding:0 20px}header{height:77px}.header-right .status{display:none}main{padding-top:30px}.intro{align-items:start}h1{font-size:24px}.subtitle{font-size:11px;max-width:200px;line-height:1.7}.clock{font-size:23px}.date{font-size:10px}.grid{grid-template-columns:1fr;gap:16px}.card{padding:22px;border-radius:22px}.calculator{grid-column:1;grid-row:auto}.weather{min-height:300px}.focus{grid-row:2;min-height:200px}.notes{grid-column:1}.key{height:58px}footer{line-height:1.8}.header-right{gap:12px}.eyebrow{font-size:9px}.temperature{font-size:63px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><span class="brand-icon" aria-hidden="true">✳</span>모멘트<span style="font-size:10px;color:#949d8c;letter-spacing:1px;font-weight:500;margin-left:7px">MOMENT</span></div>
+      <div class="header-right"><span class="status"><span class="dot"></span>오늘도, 나의 속도로</span><span class="avatar" aria-label="나의 작업 공간">M</span></div>
+    </header>
+    <main>
+      <section class="intro">
+        <div><p class="eyebrow">YOUR EVERYDAY WORKSPACE</p><h1 id="greeting">좋은 하루를 시작해요.</h1><p class="subtitle">작은 집중이 모여, 더 나은 하루가 되도록.</p></div>
+        <div class="clock"><time id="clock">--:--</time><div class="date" id="date"></div></div>
+      </section>
+      <div class="grid">
+        <section class="card weather" aria-label="현재 날씨">
+          <div class="card-head"><div class="card-title"><span class="card-icon" aria-hidden="true">⌖</span><label for="city" class="sr-only" hidden>날씨 지역</label><select id="city" aria-label="날씨 지역"><option value="seoul">서울, 대한민국</option><option value="busan">부산, 대한민국</option><option value="incheon">인천, 대한민국</option><option value="daegu">대구, 대한민국</option><option value="daejeon">대전, 대한민국</option><option value="gwangju">광주, 대한민국</option><option value="jeju">제주, 대한민국</option></select></div><div class="weather-tools"><button class="icon-btn" id="locate" aria-label="내 위치 날씨" title="내 위치 날씨">⌾</button><button class="icon-btn" id="refresh" aria-label="날씨 새로고침" title="날씨 새로고침">↻</button></div></div>
+          <div class="weather-main"><div><div class="temperature" id="temperature">--<span>°</span></div><div class="condition" id="condition" role="status">지금 날씨를 확인하고 있어요</div></div><div class="weather-art" id="weather-art" aria-hidden="true">⛅</div></div>
+          <div class="weather-details"><div><div class="detail-label">체감 온도</div><div class="detail-value" id="feels">-- °</div></div><div><div class="detail-label">습도</div><div class="detail-value" id="humidity">-- %</div></div><div><div class="detail-label">바람</div><div class="detail-value" id="wind">-- m/s</div></div></div>
+          <div class="weather-update" id="weather-update" aria-live="polite">Open-Meteo · 10분마다 자동 갱신</div>
+        </section>
+        <section class="card calculator" aria-label="계산기">
+          <div class="card-head"><div class="card-title"><span class="card-icon" aria-hidden="true">▦</span>계산기</div><span class="tag">QUICK CALCULATOR</span></div>
+          <div class="calc-screen"><div class="calc-history" id="calc-history">간단한 계산이 필요할 때</div><output class="calc-display" id="calc-display" aria-live="polite">0</output></div>
+          <div class="keys" id="keys">
+            <button class="key utility" data-action="clear" aria-label="모두 지우기">AC</button><button class="key utility" data-action="delete" aria-label="한 글자 지우기">⌫</button><button class="key utility" data-value="%" aria-label="퍼센트">%</button><button class="key operator" data-value="/" aria-label="나누기">÷</button>
+            <button class="key" data-value="7">7</button><button class="key" data-value="8">8</button><button class="key" data-value="9">9</button><button class="key operator" data-value="*" aria-label="곱하기">×</button>
+            <button class="key" data-value="4">4</button><button class="key" data-value="5">5</button><button class="key" data-value="6">6</button><button class="key operator" data-value="-" aria-label="빼기">−</button>
+            <button class="key" data-value="1">1</button><button class="key" data-value="2">2</button><button class="key" data-value="3">3</button><button class="key operator" data-value="+" aria-label="더하기">+</button>
+            <button class="key zero" data-value="0">0</button><button class="key" data-value="." aria-label="소수점">.</button><button class="key equals" data-action="equals" aria-label="계산 결과">=</button>
+          </div>
+          <p class="calc-tip">키보드로도 입력할 수 있어요 · Enter로 계산</p>
+        </section>
+        <section class="card focus" aria-label="집중 타이머">
+          <div class="card-head"><div class="card-title"><span class="card-icon" aria-hidden="true">◷</span>오롯이 집중</div><select id="duration" aria-label="집중 시간"><option value="25">25분 집중</option><option value="50">50분 집중</option><option value="5">5분 휴식</option></select></div>
+          <div class="focus-content"><div><div class="timer" id="timer" role="timer">25:00</div><div class="timer-caption" id="timer-caption">잠시, 하나의 일에만 집중해 보세요.</div></div><div class="timer-controls"><button class="primary" id="timer-toggle">시작하기&nbsp; ▷</button><button class="icon-btn timer-reset" id="timer-reset" aria-label="타이머 초기화" title="타이머 초기화">↻</button></div></div>
+          <div class="focus-progress" role="progressbar" aria-label="집중 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"><div id="progress-fill"></div></div>
+        </section>
+        <section class="card notes" aria-label="빠른 메모">
+          <div class="card-head"><div class="card-title"><span class="card-icon" aria-hidden="true">✎</span>생각 한 조각</div><span class="save-status" id="save-status" role="status">이 브라우저에 자동 저장</span></div>
+          <textarea id="notes" aria-label="메모 입력" placeholder="오늘 해야 할 일, 문득 떠오른 아이디어… 가볍게 적어 보세요." maxlength="10000"></textarea>
+          <div class="notes-footer"><span id="note-count">0 / 10,000자</span><button id="clear-notes">메모 비우기</button></div>
+        </section>
+      </div>
+      <footer><span><span class="leaf">❧</span> 서두르지 않아도 괜찮아요. 지금, 이 순간에 집중하세요.</span><span class="footer-brand">MADE FOR YOUR MOMENT</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    let toastTimeout;
+    function toast(message) { $('toast').textContent = message; $('toast').hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => $('toast').hidden = true, 4000); }
+    function updateClock() {
+      const now = new Date();
+      $('clock').textContent = now.toLocaleTimeString('ko-KR', {hour:'2-digit',minute:'2-digit',hour12:false});
+      $('clock').dateTime = now.toISOString();
+      $('date').textContent = now.toLocaleDateString('ko-KR', {month:'long',day:'numeric',weekday:'long'});
+      const h = now.getHours();
+      $('greeting').textContent = h < 6 ? '고요한 밤, 나만의 시간.' : h < 12 ? '좋은 하루를 시작해요.' : h < 18 ? '오늘도 차근차근, 나답게.' : '하루를 다정하게 마무리해요.';
+    }
+    updateClock(); setInterval(updateClock, 1000);
+
+    // Current weather, without an API key. Never substitute sample data on failure.
+    const cities = {seoul:[37.5665,126.978],busan:[35.1796,129.0756],incheon:[37.4563,126.7052],daegu:[35.8714,128.6014],daejeon:[36.3504,127.3845],gwangju:[35.1595,126.8526],jeju:[33.4996,126.5312]};
+    let coordinates = cities.seoul, weatherController, weatherRequest = 0;
+    function weatherDescription(code, day) {
+      if (code === 0) return [day ? '맑음' : '맑은 밤', day ? '☀️' : '🌙'];
+      if (code <= 2) return ['구름 조금',day ? '🌤️' : '☁️'];
+      if (code === 3) return ['흐림','☁️'];
+      if ([45,48].includes(code)) return ['안개','🌫️'];
+      if ([56,57,66,67].includes(code)) return ['어는 비 · 미끄럼 주의','🌧️'];
+      if (code >= 51 && code <= 65) return ['비','🌧️'];
+      if (code >= 71 && code <= 77 || code === 85 || code === 86) return ['눈','🌨️'];
+      if (code >= 80 && code <= 82) return ['소나기','🌦️'];
+      if (code >= 95) return ['뇌우 · 외출 시 주의','⛈️'];
+      return ['날씨 정보','🌡️'];
+    }
+    async function loadWeather() {
+      const request = ++weatherRequest;
+      if (weatherController) weatherController.abort();
+      weatherController = new AbortController();
+      const controller = weatherController;
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      $('condition').textContent = '지금 날씨를 확인하고 있어요';
+      $('weather-update').classList.remove('weather-error');
+      $('temperature').innerHTML = '--<span>°</span>';
+      $('feels').textContent = '-- °'; $('humidity').textContent = '-- %'; $('wind').textContent = '-- m/s';
+      $('weather-art').textContent = '⛅';
+      $('weather-update').textContent = 'Open-Meteo · 날씨 불러오는 중…';
+      try {
+        const query = new URLSearchParams({latitude:coordinates[0],longitude:coordinates[1],current:'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m',wind_speed_unit:'ms',timezone:'auto'});
+        const response = await fetch('https://api.open-meteo.com/v1/forecast?' + query, {signal:controller.signal});
+        if (!response.ok) throw new Error('weather response');
+        const data = await response.json(), w = data.current;
+        if (!w || !['temperature_2m','apparent_temperature','relative_humidity_2m','wind_speed_10m','weather_code','is_day'].every(key => Number.isFinite(w[key]))) throw new Error('weather data');
+        if (request !== weatherRequest) return;
+        const [description, icon] = weatherDescription(w.weather_code, w.is_day);
+        $('temperature').innerHTML = Math.round(w.temperature_2m) + '<span>°</span>';
+        $('condition').textContent = description;
+        $('weather-art').textContent = icon;
+        $('feels').textContent = Math.round(w.apparent_temperature) + ' °';
+        $('humidity').textContent = w.relative_humidity_2m + ' %';
+        $('wind').textContent = w.wind_speed_10m.toFixed(1) + ' m/s';
+        $('weather-update').textContent = '현지 ' + w.time.replace('T',' ') + ' 기준 · ';
+        const credit = document.createElement('a'); credit.href = 'https://open-meteo.com/'; credit.target = '_blank'; credit.rel = 'noopener noreferrer'; credit.textContent = 'Open-Meteo';
+        $('weather-update').append(credit, ' · 10분마다 갱신');
+      } catch (error) {
+        if (request !== weatherRequest) return;
+        $('condition').textContent = '날씨를 불러오지 못했어요';
+        $('weather-update').textContent = '인터넷 연결을 확인하고 ↻ 버튼을 눌러 주세요.';
+        $('weather-update').classList.add('weather-error');
+        $('weather-art').textContent = '☁️';
+      } finally { clearTimeout(timeout); }
+    }
+    $('city').addEventListener('change', () => { coordinates = cities[$('city').value] || coordinates; loadWeather(); });
+    $('refresh').addEventListener('click', loadWeather);
+    $('locate').addEventListener('click', () => {
+      if (!navigator.geolocation) return toast('이 브라우저에서는 위치 기능을 지원하지 않아요. 지역을 직접 선택해 주세요.');
+      if ($('locate').disabled) return;
+      $('locate').disabled = true;
+      toast('위치 권한을 허용하면 현재 위치의 날씨를 보여 드려요.');
+      navigator.geolocation.getCurrentPosition(position => {
+        $('locate').disabled = false;
+        coordinates = [position.coords.latitude,position.coords.longitude];
+        let option = $('city').querySelector('option[value="current"]');
+        if (!option) { option = document.createElement('option'); option.value = 'current'; option.textContent = '현재 위치'; $('city').append(option); }
+        $('city').value = 'current'; loadWeather();
+      }, () => { $('locate').disabled = false; toast('위치를 확인하지 못했어요. 지역 선택을 이용해 주세요.'); }, {timeout:10000,maximumAge:300000});
+    });
+    loadWeather(); setInterval(loadWeather, 600000);
+
+    // Small arithmetic parser: operator precedence, unary minus, and percent. No eval.
+    let expression = '', finished = false;
+    const pretty = value => value.replaceAll('*','×').replaceAll('/','÷').replaceAll('-','−');
+    function calculate(source) {
+      let index = 0;
+      function number() {
+        let sign = 1;
+        while (source[index] === '+' || source[index] === '-') { if (source[index++] === '-') sign *= -1; }
+        const match = source.slice(index).match(/^(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?/i);
+        if (!match) throw new Error('식을 완성해 주세요');
+        index += match[0].length;
+        let result = Number(match[0]) * sign;
+        while (source[index] === '%') { result /= 100; index++; }
+        return result;
+      }
+      function term() {
+        let result = number();
+        while (source[index] === '*' || source[index] === '/') {
+          const operator = source[index++], operand = number();
+          if (operator === '/' && operand === 0) throw new Error('0으로 나눌 수 없어요');
+          result = operator === '*' ? result * operand : result / operand;
+        }
+        return result;
+      }
+      let result = term();
+      while (source[index] === '+' || source[index] === '-') { const operator = source[index++], operand = term(); result = operator === '+' ? result + operand : result - operand; }
+      if (index !== source.length || !Number.isFinite(result)) throw new Error('계산할 수 없는 값이에요');
+      return String(Number(result.toPrecision(12)));
+    }
+    function calcInput(value, action) {
+      if (action === 'clear') { expression = ''; finished = false; $('calc-history').textContent = '간단한 계산이 필요할 때'; }
+      else if (action === 'delete') { expression = expression.slice(0,-1); finished = false; }
+      else if (action === 'equals') {
+        if (!expression) return;
+        try { const result = calculate(expression); $('calc-history').textContent = pretty(expression) + ' ='; expression = result; finished = true; }
+        catch (error) { toast(error.message); return; }
+      } else if (value) {
+        if (finished && /[\d.]/.test(value)) expression = '';
+        finished = false;
+        if (expression.length >= 60) return toast('최대 60자까지 입력할 수 있어요.');
+        if (value === '.') {
+          const last = expression.split(/[+\-*/]/).pop();
+          if (last.includes('.') || last.includes('%') || /e/i.test(last)) return;
+          if (!last) expression += '0';
+        }
+        if (value === '%' && (!expression || /[+\-*/.]$/.test(expression))) return;
+        if (/[+*/]/.test(value) && !expression) return;
+        if (/[+*/]/.test(value) && /[+\-*/]$/.test(expression)) expression = expression.replace(/[+\-*/]+$/, '');
+        if (!expression && /[+*/]/.test(value)) return;
+        expression += value;
+      }
+      $('calc-display').textContent = pretty(expression) || '0';
+    }
+    $('keys').addEventListener('click', event => { const button = event.target.closest('button'); if (button) calcInput(button.dataset.value,button.dataset.action); });
+    document.addEventListener('keydown', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input,textarea,select,[contenteditable="true"]')) return;
+      // Let native buttons handle Enter/Space; avoid triggering two actions.
+      if (event.target.closest('button') && (event.key === 'Enter' || event.key === ' ')) return;
+      if (/^[0-9.+\-*/%]$/.test(event.key)) { event.preventDefault(); calcInput(event.key); }
+      else if (event.key === 'Enter' || event.key === '=') { event.preventDefault(); calcInput(null,'equals'); }
+      else if (event.key === 'Backspace') { event.preventDefault(); calcInput(null,'delete'); }
+      else if (event.key === 'Escape') calcInput(null,'clear');
+    });
+
+    // A wall-clock deadline keeps the timer accurate after a background tab resumes.
+    let total = 25 * 60, remaining = total, deadline = 0, running = false;
+    function renderTimer() {
+      $('timer').textContent = String(Math.floor(remaining / 60)).padStart(2,'0') + ':' + String(remaining % 60).padStart(2,'0');
+      $('timer-toggle').textContent = running ? '일시 정지  Ⅱ' : remaining === total ? '시작하기  ▷' : remaining === 0 ? '다시 시작  ▷' : '이어 하기  ▷';
+      const percent = Math.round((total - remaining) / total * 100);
+      $('progress-fill').style.width = percent + '%'; $('progress').setAttribute('aria-valuenow',percent);
+      $('duration').disabled = running;
+    }
+    function tick() {
+      if (!running) return;
+      remaining = Math.max(0,Math.ceil((deadline - Date.now()) / 1000));
+      if (remaining === 0) { running = false; $('timer-caption').textContent = '잘했어요! 잠시 기지개를 켜 볼까요?'; toast('타이머가 끝났어요. 수고한 나에게 잠깐의 여유를 주세요.'); }
+      renderTimer();
+    }
+    $('timer-toggle').addEventListener('click', () => {
+      if (running) { tick(); running = false; }
+      else { if (remaining === 0) remaining = total; deadline = Date.now() + remaining * 1000; running = true; $('timer-caption').textContent = '지금은 오직 나의 시간. 차분하게 집중해요.'; }
+      renderTimer();
+    });
+    function resetTimer() { running = false; total = Number($('duration').value) * 60; remaining = total; $('timer-caption').textContent = '잠시, 하나의 일에만 집중해 보세요.'; renderTimer(); }
+    $('timer-reset').addEventListener('click',resetTimer); $('duration').addEventListener('change',resetTimer);
+    setInterval(tick,250); document.addEventListener('visibilitychange',tick);
+
+    const noteKey = 'moment.notes.v1';
+    function noteCount() { $('note-count').textContent = $('notes').value.length.toLocaleString('ko-KR') + ' / 10,000자'; }
+    try { $('notes').value = localStorage.getItem(noteKey) || ''; }
+    catch { $('save-status').textContent = '저장 불가 · 창을 닫으면 메모가 사라져요'; }
+    noteCount();
+    function saveNotes() {
+      noteCount();
+      try { localStorage.setItem(noteKey,$('notes').value); $('save-status').textContent = '✓ 이 브라우저에 저장됨'; }
+      catch { $('save-status').textContent = '저장 불가 · 메모를 따로 복사해 주세요'; }
+    }
+    $('notes').addEventListener('input',saveNotes);
+    $('clear-notes').addEventListener('click', () => { if ($('notes').value && confirm('저장된 메모를 모두 비울까요?')) { $('notes').value = ''; saveNotes(); $('notes').focus(); } });
+  </script>
+</body>
+</html>
